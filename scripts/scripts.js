@@ -3,12 +3,12 @@ Need to find a way to make use of the start button and then make a start again b
 appear when game is finished
 */
 
-
 // select and store cards in an array called cards
 let cards = document.getElementsByClassName("card");
 let overlay = document.getElementsByClassName("overlay");
 let startBtn = document.getElementById("start");
 let message = document.querySelector("h2");
+let cardContainer = document.querySelector(".container")
 
 // Random colors - rgb - 0-255 for each channel r, g b
 // generate a random value between 0 and 255
@@ -66,7 +66,6 @@ function randomizeColorsOnCards() {
     }
 }
 
-randomizeColorsOnCards();
 
 // temporary storage for backgrounds  
 let tempStorage = [];
@@ -90,37 +89,45 @@ function reveal(el) {
 //         tempStorage2 = [];
 //         console.log(tracker)
 //     } else {
-        // tempStorage2[0].style.display = "none";
+// tempStorage2[0].style.display = "none";
 //     }
 // }
 
 function hideCards() {
-        tempStorage2[0].style.display = "initial";
-        tempStorage2[1].style.display = "initial";
-        tempStorage = [];
-        tempStorage2 = [];
-    }
-
-for (let i = 0; i < overlay.length; i++) {
-    overlay[i].addEventListener("click", function () {
-        reveal(this);
-        if (tempStorage.length === 2) {
-            if (tempStorage[0] === tempStorage[1]) {
-                message.textContent = "It's a match";
-                tempStorage = [];
-                tempStorage2 = [];
-                tracker++;
-                console.log(tracker)
-            } else {
-                message.textContent = "Not a match";
-                // checkIfMatch();
-                setTimeout(function(){
-                    hideCards();
-                }, 1000);
-            }
-        }
-        if(tracker === 6) {
-            message.textContent = "All pairs found, well done!";
-        }
-    })
+    tempStorage2[0].style.display = "initial";
+    tempStorage2[1].style.display = "initial";
+    tempStorage = [];
+    tempStorage2 = [];
 }
+
+startBtn.addEventListener("click", function() {
+    this.remove();
+    message.textContent = "Good Luck!";
+    cardContainer.style.visibility = "visible";
+
+
+    randomizeColorsOnCards();
+
+    for (let i = 0; i < overlay.length; i++) {
+        overlay[i].addEventListener("click", function () {
+            reveal(this);
+            if (tempStorage.length === 2) {
+                if (tempStorage[0] === tempStorage[1]) {
+                    message.textContent = "It's a match";
+                    tempStorage = [];
+                    tempStorage2 = [];
+                    tracker++;
+                    console.log(tracker)
+                } else {
+                    message.textContent = "Not a match";
+                    setTimeout(function () {
+                        hideCards();
+                    }, 1000);
+                }
+            }
+            if (tracker === 6) {
+                message.textContent = "All pairs found, well done!";
+            }
+        })
+    }
+})
