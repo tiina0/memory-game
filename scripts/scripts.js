@@ -1,14 +1,20 @@
-/* This version works, but game "starts" immediately after page load
-Need to find a way to make use of the start button and then make a start again button
-appear when game is finished
-*/
+// This version works - game starts only after pressing the start button
+// when game finishes, play again? button appears but nothing happens when clickin on it
+// issues: how to "reset game"?
+
 
 // select and store cards in an array called cards
 let cards = document.getElementsByClassName("card");
 let overlay = document.getElementsByClassName("overlay");
 let startBtn = document.getElementById("start");
 let message = document.querySelector("h2");
-let cardContainer = document.querySelector(".container")
+let cardContainer = document.querySelector(".container");
+let playAgainBtn = document.getElementById("playAgain");
+// temporary storage for backgrounds  
+let tempStorage = [];
+// temporary storage for elements ( for what ? )
+let tempStorage2 = [];
+let tracker = 0;
 
 // Random colors - rgb - 0-255 for each channel r, g b
 // generate a random value between 0 and 255
@@ -56,7 +62,7 @@ function generateArrForRandomColors(num) {
 
 // set of randomColors with 6 unique colors
 let randomColorsArray = generateArrForRandomColors(6);
-console.log(randomColorsArray);
+
 
 function randomizeColorsOnCards() {
     for (let i = 0; i < cards.length; i++) {
@@ -66,13 +72,6 @@ function randomizeColorsOnCards() {
     }
 }
 
-
-// temporary storage for backgrounds  
-let tempStorage = [];
-// temporary storage for elements ( for what ? )
-let tempStorage2 = [];
-let tracker = 0;
-
 function reveal(el) {
     let element = el;
     tempStorage2.push(element);
@@ -80,18 +79,6 @@ function reveal(el) {
     console.log(tempStorage)
     element.style.display = "none";
 }
-
-// function checkIfMatch() {
-//     if (tempStorage[0] === tempStorage[1]) {
-//         message.textContent = "It's a match";
-//         tracker++;
-//         tempStorage = [];
-//         tempStorage2 = [];
-//         console.log(tracker)
-//     } else {
-// tempStorage2[0].style.display = "none";
-//     }
-// }
 
 function hideCards() {
     tempStorage2[0].style.display = "initial";
@@ -101,12 +88,17 @@ function hideCards() {
 }
 
 startBtn.addEventListener("click", function() {
-    this.remove();
+
+    tempStorage = [];
+    tempStorage2 = [];
+    
+    randomizeColorsOnCards();
+    console.log(randomColorsArray);
+
+    this.style.display = "none";
     message.textContent = "Good Luck!";
     cardContainer.style.visibility = "visible";
 
-
-    randomizeColorsOnCards();
 
     for (let i = 0; i < overlay.length; i++) {
         overlay[i].addEventListener("click", function () {
@@ -117,7 +109,6 @@ startBtn.addEventListener("click", function() {
                     tempStorage = [];
                     tempStorage2 = [];
                     tracker++;
-                    console.log(tracker)
                 } else {
                     message.textContent = "Not a match";
                     setTimeout(function () {
@@ -127,7 +118,31 @@ startBtn.addEventListener("click", function() {
             }
             if (tracker === 6) {
                 message.textContent = "All pairs found, well done!";
+                playAgainBtn.style.visibility = "visible";
+                tracker = 0;
             }
         })
     }
 })
+
+// function playAgain() {
+//     playAgainBtn.style.visibility = "hidden";
+//     message.textContent = "";
+//     cardContainer.style.visibility = "hidden";
+//     startBtn.style.display = "initial";
+// }
+
+// function restore() {
+//     for(let i = 0; i < overlay.length; i++) {
+//         overlay[i].style.display = "flex";
+//     }
+// }
+
+// playAgainBtn.addEventListener("click", function() {
+//     playAgain();
+//     restore();
+// });
+
+// create function to restore cards to initial styles
+
+

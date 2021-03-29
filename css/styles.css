@@ -31,14 +31,16 @@
     border: 1px solid black;
 }
 
-.hidden {
-    background-color: white;
-}
 
 .message {
     height: 20px;
 }
 
 .divForBtn {
+    margin: 20px auto;
     height: 20px;
+}
+
+#playAgain {
+    visibility: hidden;
 }
