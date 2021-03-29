@@ -1,0 +1,39 @@
+.content {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.container {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 20px;
+    /* border: 1px solid black; */
+}
+
+.overlay {
+    position: absolute;
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    border: 1px solid black;
+}
+
+.hidden {
+    background-color: white;
+}
+
+.message {
+    height: 20px;
+}
