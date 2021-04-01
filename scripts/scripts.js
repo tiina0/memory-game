@@ -63,7 +63,7 @@ function randomizeColorsOnCards() {
 
 function reveal(element) {
     if (tempStorage.length <= 1 && tempStorage2.length <= 1) {
-        element.style.zIndex = "-10";
+        element.style.display = "none";
         tempStorage2.push(element);
         tempStorage.push(element.parentElement.style.backgroundColor);
     }
@@ -71,7 +71,7 @@ function reveal(element) {
 
 function hideCards() {
     for (let i = 0; i < tempStorage2.length; i++) {
-        tempStorage2[i].style.zIndex = "10";
+        tempStorage2[i].style.display = "initial"
     }
     tempStorage = [];
     tempStorage2 = [];
@@ -125,7 +125,7 @@ startBtn.addEventListener("click", function () {
     message.textContent = "Good Luck!";
     randomizeColorsOnCards();
     for (let i = 0; i < overlay.length; i++) {
-        overlay[i].style.zIndex = "10";
+        overlay[i].style.display = "initial"
     }
     cardContainer.style.visibility = "visible";
     doStuffWhenCardGetsClicked();

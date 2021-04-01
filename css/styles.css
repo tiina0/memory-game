@@ -1,3 +1,7 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .content {
     width: 80%;
     margin: 0 auto;
@@ -5,10 +9,13 @@
 }
 
 .container {
+    width: 60%;
     visibility: hidden;
+    margin: auto;
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card {
@@ -18,17 +25,20 @@
     display: block;
     margin: 20px;
     /* border: 1px solid black; */
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .overlay {
     position: absolute;
-    background-color: white;
-    width: 98px;
-    height: 98px;
+    background-color: #F2F2F2;
+    width: 100px;
+    height: 100px;
     top: 0;
     left: 0;
-    z-index: 10;
-    border: 1px solid black;
+    /* z-index: 1; */
+    /* border: 1px solid black; */
+    border-radius: 10px;
 }
 
 
@@ -43,4 +53,16 @@
 
 #playAgain {
     visibility: hidden;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    background-color: rgb(73, 71, 71);
+    color: white;
+}
+
+#start {
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    background-color: rgb(73, 71, 71);
+    color: white;
+
 }
