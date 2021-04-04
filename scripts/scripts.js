@@ -1,16 +1,17 @@
 // Works
 // small bug: sometimes after checking two cards 
 
-
 let cards = document.getElementsByClassName("card");
 let overlay = document.getElementsByClassName("overlay");
 let startBtn = document.getElementById("start");
 let message = document.querySelector("h2");
 let cardContainer = document.querySelector(".container");
 let playAgainBtn = document.getElementById("playAgain");
+let divForCardNum = document.getElementById("divForCardNum");
 let tempStorage = [];
 let tempStorage2 = [];
 let tracker = 0;
+let numberInput = document.getElementById("number");
 
 function randomColorValue() {
     return Math.floor(Math.random() * (255 - 0) + 0);
@@ -54,8 +55,8 @@ function generateArrForRandomColors(num) {
 }
 
 // function randomizeColorsOnCards(cards, size) {
-function randomizeColorsOnCards() {
-    let randomColorsArray = generateArrForRandomColors(6);
+function randomizeColorsOnCards(numOfCards) {
+    let randomColorsArray = generateArrForRandomColors(numOfCards);
     for (let i = 0; i < cards.length; i++) {
         cards[i].style.backgroundColor = randomColorsArray[i];
     }
@@ -81,6 +82,7 @@ function checkIfMatch() {
     if (tempStorage[0] === tempStorage[1]) {
         message.textContent = "It's a match";
         tracker++;
+        console.log(tracker)
         tempStorage = [];
         tempStorage2 = [];
     } else {
@@ -92,47 +94,70 @@ function checkIfMatch() {
 }
 
 function reset() {
+    divForCardNum.style.display = "initial";
     playAgainBtn.style.visibility = "hidden";
     startBtn.style.display = "initial";
     message.textContent = "";
     cardContainer.style.visibility = "hidden";
     tempStorage = [];
     tempStorage2 = [];
+    // empty container
+    console.log(cards.length);
 }
 
-function resetTracker() {
-    if (tracker === 6) {
+function checkAndResetTracker(numOfCards) {
+    if (tracker == numOfCards) {
         tracker = 0;
         message.textContent = "All pairs found, well done!";
         playAgainBtn.style.visibility = "visible";
     }
 }
 
-function doStuffWhenCardGetsClicked() {
+function doStuffWhenCardGetsClicked(numOfCards) {
     for (let i = 0; i < overlay.length; i++) {
         overlay[i].onclick = function () {
             reveal(this);
-            if (tempStorage.length == 2) {
+            if (tempStorage.length === 2) {
                 checkIfMatch();
-                resetTracker();
+                checkAndResetTracker(numOfCards);
             }
-        };
+        }
+    }
+}
+
+function addCards(numOfCards) {
+    for(let i = 0; i < numOfCards * 2; i++) {
+        let cardDiv = document.createElement("div");
+        cardDiv.classList.add("card");
+        cardContainer.appendChild(cardDiv);
+        let overlayDiv = document.createElement("div");
+        overlayDiv.classList.add("overlay");
+        cardDiv.appendChild(overlayDiv);
     }
 }
 
 startBtn.addEventListener("click", function () {
-    this.style.display = "none";
-    message.textContent = "Good Luck!";
-    randomizeColorsOnCards();
-    for (let i = 0; i < overlay.length; i++) {
-        overlay[i].style.display = "initial"
+    let numOfCards = numberInput.value;
+    if(numOfCards < 3) {
+        alert("please choose number of pairs to be found");
+    } else {
+        addCards(numOfCards);
+        this.style.display = "none";
+        message.textContent = "Good Luck!";
+        divForCardNum.style.display = "none";
+        randomizeColorsOnCards(numOfCards);
+        for (let i = 0; i < overlay.length; i++) {
+            overlay[i].style.display = "initial"
+        }
+        cardContainer.style.visibility = "visible";
+        doStuffWhenCardGetsClicked(numOfCards);
     }
-    cardContainer.style.visibility = "visible";
-    doStuffWhenCardGetsClicked();
 });
 
 playAgainBtn.addEventListener("click", function () {
+    numberInput.selectedIndex = 0;
     reset();
+    // console.log(cards);
 });
 
 
