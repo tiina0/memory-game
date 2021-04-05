@@ -1,17 +1,20 @@
-// Works
-// small bug: sometimes after checking two cards 
-
 let cards = document.getElementsByClassName("card");
 let overlay = document.getElementsByClassName("overlay");
 let startBtn = document.getElementById("start");
 let message = document.querySelector("h2");
-let cardContainer = document.querySelector(".container");
 let playAgainBtn = document.getElementById("playAgain");
 let divForCardNum = document.getElementById("divForCardNum");
 let tempStorage = [];
 let tempStorage2 = [];
 let tracker = 0;
 let numberInput = document.getElementById("number");
+let divForCards = document.getElementById("card-content");
+let cardContainer = document.createElement("div");
+
+function createContainer() {
+    divForCards.appendChild(cardContainer)
+    cardContainer.setAttribute('id', 'container');
+}
 
 function randomColorValue() {
     return Math.floor(Math.random() * (255 - 0) + 0);
@@ -55,8 +58,8 @@ function generateArrForRandomColors(num) {
 }
 
 // function randomizeColorsOnCards(cards, size) {
-function randomizeColorsOnCards(numOfCards) {
-    let randomColorsArray = generateArrForRandomColors(numOfCards);
+function randomizeColorsOnCards(numOfPairs) {
+    let randomColorsArray = generateArrForRandomColors(numOfPairs);
     for (let i = 0; i < cards.length; i++) {
         cards[i].style.backgroundColor = randomColorsArray[i];
     }
@@ -82,7 +85,7 @@ function checkIfMatch() {
     if (tempStorage[0] === tempStorage[1]) {
         message.textContent = "It's a match";
         tracker++;
-        console.log(tracker)
+        // console.log(tracker)
         tempStorage = [];
         tempStorage2 = [];
     } else {
@@ -93,40 +96,37 @@ function checkIfMatch() {
     }
 }
 
-function reset() {
-    divForCardNum.style.display = "initial";
-    playAgainBtn.style.visibility = "hidden";
-    startBtn.style.display = "initial";
-    message.textContent = "";
-    cardContainer.style.visibility = "hidden";
-    tempStorage = [];
-    tempStorage2 = [];
-    // empty container
-    console.log(cards.length);
-}
-
-function checkAndResetTracker(numOfCards) {
-    if (tracker == numOfCards) {
+function checkAndResetTracker(numOfPairs) {
+    if (tracker == numOfPairs) {
         tracker = 0;
         message.textContent = "All pairs found, well done!";
         playAgainBtn.style.visibility = "visible";
     }
 }
 
-function doStuffWhenCardGetsClicked(numOfCards) {
+function doStuffWhenCardGetsClicked(numOfPairs) {
     for (let i = 0; i < overlay.length; i++) {
         overlay[i].onclick = function () {
             reveal(this);
             if (tempStorage.length === 2) {
                 checkIfMatch();
-                checkAndResetTracker(numOfCards);
+                checkAndResetTracker(numOfPairs);
             }
         }
     }
 }
 
-function addCards(numOfCards) {
-    for(let i = 0; i < numOfCards * 2; i++) {
+function appendContainer() {
+    divForCards.appendChild(cardContainer)
+    cardContainer.setAttribute('id', 'container');
+}
+
+
+function addCards(numOfPairs) {
+
+    appendContainer();
+    console.log(numOfPairs);
+    for (let i = 0; i < numOfPairs * 2; i++) {
         let cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         cardContainer.appendChild(cardDiv);
@@ -136,31 +136,53 @@ function addCards(numOfCards) {
     }
 }
 
+
+
 startBtn.addEventListener("click", function () {
-    let numOfCards = numberInput.value;
-    if(numOfCards < 3) {
+    let numOfPairs = numberInput.value;
+    if (numOfPairs < 2) {
         alert("please choose number of pairs to be found");
     } else {
-        addCards(numOfCards);
+        createContainer();
+        addCards(numOfPairs);
         this.style.display = "none";
         message.textContent = "Good Luck!";
         divForCardNum.style.display = "none";
-        randomizeColorsOnCards(numOfCards);
+        randomizeColorsOnCards(numOfPairs);
+        console.log(cards.length);
         for (let i = 0; i < overlay.length; i++) {
             overlay[i].style.display = "initial"
         }
         cardContainer.style.visibility = "visible";
-        doStuffWhenCardGetsClicked(numOfCards);
+        doStuffWhenCardGetsClicked(numOfPairs);
     }
 });
 
 playAgainBtn.addEventListener("click", function () {
+    // cards.length = numOfPairs;
+    console.log(cards.length)
+    cardContainer.style.visibility = "hidden";
+    divForCardNum.style.display = "initial";
+    playAgainBtn.style.visibility = "hidden";
+    message.textContent = "";
+    startBtn.style.display = "initial";
+    // console.log(cards.length);
     numberInput.selectedIndex = 0;
-    reset();
-    // console.log(cards);
+    tempStorage = [];
+    tempStorage2 = [];
 });
 
-
+// function reset() {
+//     reset();
+//     cardContent.children[0].remove()
+//     divForCardNum.style.display = "initial";
+//     playAgainBtn.style.visibility = "hidden";
+//     startBtn.style.display = "initial";
+//     message.textContent = "";
+//     cardContainer.style.visibility = "hidden";
+//     tempStorage = [];
+//     tempStorage2 = [];
+// }
 
 
 
