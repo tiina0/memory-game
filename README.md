@@ -1,5 +1,3 @@
 # memory-game
 
-Experiments
-
-Game works, styles could be improved
+Simple game where you need to find all cards with matching colors
