@@ -16,11 +16,7 @@
         <h1>Memory Game</h1>
         <p id="instructions">Find all cards with matching colors</p>
         
-        <div class="divForBtn">
-            <button id="playAgain">Play again?</button>
-        </div>
-
-        <div id="divForCardNum">
+       <div id="divForCardNum">
             <label for="numberOfCards">Choose number of pairs</label>
             <select name="number" id="number">
                 <option value="0">Select</option>
@@ -34,13 +30,14 @@
             </select>
         </div>
 
-        <div class="divForBtn">
-            <button id="start">Start</button>
-        </div>
-
-        <div class="message">
+        <div>
             <p id="message"></p>
+            <button class="btn" id="start">Start</button>
         </div>
+        
+        <p>
+            <button id="playAgain">Play again?</button>
+        </p>
 
         <div id="cardContainer">
 

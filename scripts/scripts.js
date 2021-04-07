@@ -148,7 +148,7 @@ playAgainBtn.onclick = function () {
     }
     cardContainer.style.visibility = "hidden";
     divForCardNum.style.display = "initial";
-    playAgainBtn.style.visibility = "hidden";
+    playAgainBtn.style.visibility = "hidden"
     message.textContent = "";
     startBtn.style.display = "initial";
     numberInput.selectedIndex = 0;
