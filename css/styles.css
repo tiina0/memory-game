@@ -1,48 +1,57 @@
 body {
+    margin: 0;
+    padding: 0;
+    color: rgb(0, 255, 255);
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #161b22;
 }
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 20px;
+    font-size: 3rem;
+    font-style: italic;
+    text-shadow: 2px 2px #000;
+}
+
 
 .content {
-    width: 80%;
+    width: 90%;
+    height: 100vh;
     margin: 0 auto;
     text-align: center;
-}
+    background-color: #374152;
 
-.container {
-    width: 60%;
-    visibility: hidden;
-    margin: auto;
-    margin-top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .card {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     display: block;
     margin: 20px;
-    /* border: 1px solid black; */
     border-radius: 10px;
-    box-shadow: 5px 5px 5px grey;
+    box-shadow: 5px 5px 5px rgb(36, 35, 35);
 }
 
 .overlay {
     position: absolute;
     background-color: #F2F2F2;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     top: 0;
     left: 0;
-    /* z-index: 1; */
-    /* border: 1px solid black; */
+    display: block;
     border-radius: 10px;
 }
 
+label {
+    text-shadow: 1px 1px #000;
+}
 
 .message {
+    text-shadow: 2px 2px #000;
     height: 20px;
 }
 
@@ -51,18 +60,32 @@ body {
     height: 20px;
 }
 
+#instructions {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#cardContainer {
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    visibility: hidden;
+    margin: auto;
+    margin-top: 10px;
+}
+
 #playAgain {
     visibility: hidden;
     padding: .5rem 1rem;
     border-radius: 5px;
-    background-color: rgb(73, 71, 71);
-    color: white;
+    background-color: rgb(36, 35, 35);
+    color: rgb(0, 255, 255);
 }
 
 #start {
     padding: .5rem 1rem;
     border-radius: 5px;
-    background-color: rgb(73, 71, 71);
-    color: white;
-
+    background-color: rgb(36, 35, 35);
+    color: rgb(0, 255, 255);
 }
