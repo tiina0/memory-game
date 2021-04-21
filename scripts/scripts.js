@@ -125,7 +125,7 @@ function changePageContentWhenGameStarts(startBtn) {
 function numOfRows(numOfPairs) {
     if (numOfPairs == 3) {
         cardContainer.classList.add("threePairs");
-    } else if(numOfPairs == 4 || numOfPairs == 6 || numOfPairs == 8) {
+    } else if (numOfPairs >= 4 && numOfPairs <= 8) {
         cardContainer.classList.add("fourSixOrEightPairs");
     } else if (numOfPairs == 10) {
         cardContainer.classList.add("tenPairs");
@@ -136,19 +136,15 @@ function numOfRows(numOfPairs) {
 
 function startGame() {
     let numOfPairs = numberInput.value;
-    if (numOfPairs < 2) {
-        alert("Please select number of pairs to be found");
-    } else {
-        numOfRows(numOfPairs);
-        addCards(numOfPairs);
-        randomizeColorsOnCards(numOfPairs);
-        changePageContentWhenGameStarts(startBtn);
-        doStuffWhenCardGetsClicked(numOfPairs);
-        quitBtn.style.visibility = "visible";
-    }
+    numOfRows(numOfPairs);
+    addCards(numOfPairs);
+    randomizeColorsOnCards(numOfPairs);
+    changePageContentWhenGameStarts(startBtn);
+    doStuffWhenCardGetsClicked(numOfPairs);
+    quitBtn.style.visibility = "visible";
 }
 
-function startAgain() {
+function playAgain() {
     for (let i = cardContainer.children.length - 1; i >= 0; --i) {
         cardContainer.children[i].remove();
     }
@@ -164,6 +160,6 @@ function startAgain() {
     tracker = 0;
 }
 
-playAgainBtn.addEventListener("click", startAgain);
-quitBtn.addEventListener("click", startAgain);
+playAgainBtn.addEventListener("click", playAgain);
+quitBtn.addEventListener("click", playAgain);
 startBtn.addEventListener("click", startGame);
