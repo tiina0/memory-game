@@ -32,7 +32,6 @@ function shuffle(arr) {
     return arr;
 }
 
-
 function generateArrForRandomColors(num) {
     let arr = []
     for (let i = 1; i <= num; i++) {
@@ -162,6 +161,7 @@ function startAgain() {
     message.textContent = "";
     startBtn.style.display = "initial";
     numberInput.selectedIndex = 0;
+    tracker = 0;
 }
 
 playAgainBtn.addEventListener("click", startAgain);
