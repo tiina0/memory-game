@@ -6,7 +6,8 @@ let playAgainBtn = document.getElementById("playAgain");
 let divForCardNum = document.getElementById("divForCardNum");
 let tracker = 0;
 let numberInput = document.getElementById("number");
-let cardContainer = document.getElementById("cardContainer");
+let cardContainer = document.getElementById("cardContainer")
+let quitBtn = document.querySelector(".pForQuitBtn");
 let a;
 let b;
 let aOverlay;
@@ -68,7 +69,9 @@ function checkAndResetTracker(numOfPairs) {
     if (tracker == numOfPairs) {
         tracker = 0;
         message.textContent = "All pairs found, well done!";
+        quitBtn.style.visibility = "hidden";
         playAgainBtn.style.visibility = "visible";
+        playAgainBtn.classList.add("fadeInAndOut");
     }
 }
 
@@ -120,26 +123,47 @@ function changePageContentWhenGameStarts(startBtn) {
     cardContainer.style.visibility = "visible";
 }
 
-startBtn.onclick = function () {
+function numOfRows(numOfPairs) {
+    if (numOfPairs == 3) {
+        cardContainer.classList.add("threePairs");
+    } else if(numOfPairs == 4 || numOfPairs == 6 || numOfPairs == 8) {
+        cardContainer.classList.add("fourSixOrEightPairs");
+    } else if (numOfPairs == 10) {
+        cardContainer.classList.add("tenPairs");
+    } else if (numOfPairs == 12) {
+        cardContainer.classList.add("twelvePairs");
+    }
+}
+
+function startGame() {
     let numOfPairs = numberInput.value;
     if (numOfPairs < 2) {
-        alert("Please choose number of pairs to be found");
+        alert("Please select number of pairs to be found");
     } else {
+        numOfRows(numOfPairs);
         addCards(numOfPairs);
         randomizeColorsOnCards(numOfPairs);
         changePageContentWhenGameStarts(startBtn);
         doStuffWhenCardGetsClicked(numOfPairs);
+        quitBtn.style.visibility = "visible";
     }
 }
 
-playAgainBtn.onclick = function () {
+function startAgain() {
     for (let i = cardContainer.children.length - 1; i >= 0; --i) {
         cardContainer.children[i].remove();
     }
+    quitBtn.style.visibility = "hidden";
     cardContainer.style.visibility = "hidden";
+    cardContainer.className = "";
     divForCardNum.style.display = "initial";
     playAgainBtn.style.visibility = "hidden"
+    playAgainBtn.classList.remove("fadeInAndOut");
     message.textContent = "";
     startBtn.style.display = "initial";
     numberInput.selectedIndex = 0;
 }
+
+playAgainBtn.addEventListener("click", startAgain);
+quitBtn.addEventListener("click", startAgain);
+startBtn.addEventListener("click", startGame);

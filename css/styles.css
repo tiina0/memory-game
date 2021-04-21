@@ -1,19 +1,30 @@
 body {
     margin: 0;
     padding: 0;
-    color: rgb(0, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
+    color: #00ffff;
+    font-family: 'Roboto Mono', monospace;
     background-color: #161b22;
 }
 
 h1 {
     margin-top: 0;
     margin-bottom: 0;
-    padding-top: 30px;
+    padding-top: 20px;
     font-size: 3rem;
     text-shadow: 2px 2px #000;
 }
 
+label {
+    text-shadow: 1px 1px #000;
+}
+
+select {
+    font-family: 'Roboto Mono', monospace;
+    padding: 0.25rem;
+    background-color: #374152;
+    color: #00ffff;
+    border-radius: 5px;
+}
 
 .content {
     overflow: hidden;
@@ -30,7 +41,7 @@ h1 {
     position: relative;
     width: 100px;
     height: 100px;
-    margin: 20px;
+    margin: 0.75rem;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgb(36, 35, 35);
 }
@@ -45,17 +56,74 @@ h1 {
     border-radius: 10px;
 }
 
-label {
-    text-shadow: 1px 1px #000;
-}
-
-.message {
-    text-shadow: 2px 2px #000;
-    height: 20px;
-}
-
 .btn {
-    margin: 10px auto;
+    font-family: 'Roboto Mono', monospace;
+    padding: .5rem 1rem;
+    border: none;
+    border-top: 1px solid #00ffff;
+    border-left: 1px solid #00ffff;
+    cursor: pointer;
+    border-radius: 1rem;
+    background-color: rgb(36, 35, 35);
+    color: #00ffff;
+}
+
+.btn:active {
+    outline: 0;
+}
+
+.quitBtn {
+    border-top: 1px solid #FFA577;
+    border-left: 1px solid #FFA577;
+    color: #FFA577;
+}
+
+.fadeInAndOut {
+    animation: fadeinout 2.5s linear 1 forwards;
+    animation-iteration-count: infinite;
+}
+
+.pForBtn {
+    padding: 0;
+    margin: 0 auto;
+}
+
+.pForQuitBtn {
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.threePairs {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    justify-items: center;
+    column-gap: 1.5rem;
+}
+
+.fourSixOrEightPairs {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    justify-items: center;
+    column-gap: 1.5rem;
+}
+
+.tenPairs {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px;
+    justify-items: center;
+    column-gap: 1.5rem;
+}
+
+.twelvePairs {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px;
+    justify-items: center;
+    column-gap: 1.5rem;
+}
+
+#message {
+    text-shadow: 1px 1px #000;
 }
 
 #instructions {
@@ -65,44 +133,70 @@ label {
 }
 
 #cardContainer {
-    width: 80%;
-    padding: 0 20px;
-    display: flex;
+    width: 50%;
     justify-content: center;
-    flex-wrap: wrap;
     visibility: hidden;
     margin: auto;
-    margin-top: 10px;
 }
 
+
 #playAgain {
+    margin: 0;
     visibility: hidden;
-    padding: .5rem 1rem;
-    border-radius: 5px;
-    background-color: rgb(36, 35, 35);
-    color: rgb(0, 255, 255);
+    margin-bottom: 1rem;
 }
 
 #start {
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 0.75rem;
     margin-top: 0;
-    padding: .5rem 1rem;
-    border-radius: 5px;
-    background-color: rgb(36, 35, 35);
-    color: rgb(0, 255, 255);
+}
+
+@keyframes fadeinout {
+    0% { opacity: 0.25;}
+    50% { opacity: 1;}
+    100% { opacity: 0.25;}
 }
 
 @media only screen and (max-width: 1366px) {
-    .content {
-        width: 95%;
-        padding-bottom: 30px;
+    h1 {
+        font-size: 2.5rem;
     }
+    .content {
+        width: 60%;
+        padding-bottom: 20px;
+    }
+
     .card {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
     
     .overlay {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .twoPairs {
+        grid-template-columns: 60px 60px;
+    }
+
+    .threePairs {
+        grid-template-columns: 60px 60px 60px;
+    }
+    
+    .fourSixOrEightPairs {
+        grid-template-columns: 60px 60px 60px 60px;
+    }
+    
+    .tenPairs {
+        grid-template-columns: 60px 60px 60px 60px 60px;
+
+    }
+    
+    .twelvePairs {
+        grid-template-columns: 60px 60px 60px 60px 60px 60px;
+
     }
 }
