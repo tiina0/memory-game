@@ -1,3 +1,3 @@
 # memory-game
 
-A simple game where the player need to find all cards with matching colors
+A simple game where the player needs to find all cards with matching colors
