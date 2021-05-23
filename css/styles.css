@@ -214,10 +214,12 @@ select {
         height: 50px;
     }
 
-    .tenPairs,
-    .twelvepairs {
+    .tenPairs {
         grid-template-columns: 60px 60px 60px 60px;
+    }
 
+    .twelvePairs {
+        grid-template-columns: 60px 60px 60px 60px;
     }
    
 }
