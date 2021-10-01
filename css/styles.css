@@ -146,6 +146,10 @@ select {
     margin-bottom: 1rem;
 }
 
+#playAgain:hover {
+    animation: none;
+}
+
 #start {
     border-radius: 1rem;
     font-size: 1rem;
